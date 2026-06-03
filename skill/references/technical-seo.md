@@ -30,4 +30,13 @@ Enforce these targets in all builds:
 ## 3. Asset & Link Optimization Standards
 *   **Image Alt Text**: Every image element MUST include a descriptive, meaningful `alt` attribute describing the visual content for indexing and screen readers. Never use empty alt tags for illustrative images unless they are strictly decorative (e.g. `alt=""`).
 *   **Lazy Loading**: Force native lazy loading for all off-screen assets and images: `<img loading="lazy" ... />`. Do NOT lazy load above-the-fold/hero images to avoid negatively impacting LCP.
-*   **Clickable Element Access**: All links (`<a>`) and buttons (`<button>`) must contain descriptive inner text. For icon-only links or interactive widgets, supply explicit `aria-label` or `title` properties. Empty or unlabeled clickable elements are critical crawl accessibility issues.
+*   **Link Accessibility & Semantics**: All links (`<a>` or `<Link>`) and buttons (`<button>`) must contain descriptive inner text. For icon-only elements or interactive widgets, supply explicit `aria-label` or `title` properties. Empty or unlabeled clickable elements are critical crawl accessibility issues. Crucially, **all navigation to other routes, phone dialers, external sites, or page section IDs must use hyperlink tags (`<a>` or `<Link>`) rather than `<button>` tags with `onClick` redirection scripts**. If styling requires a button appearance, use class modifiers or component wrappers (such as Radix/Shadcn's `asChild` composition). This allows crawlers to build complete site graphs.
+
+---
+
+## 4. Scroll & Layout Shift Animation Audit
+*   **Initial Visibility Verification**: Inspect the initial markup and styles. Any library or script (e.g. dynamic intersection observers, scroll animations like GSAP scroll triggers, dynamic scroll reveals) that hides content (`opacity: 0`, `display: none`, or extreme `translate` offsets) until a scroll event is fired **MUST** be flagged. Search engine crawlers do not execute page scrolls when indexing, so any content revealed only via scroll-triggers remains invisible.
+*   **Hardware-Accelerated Animation Rule**: Animations must be executed using properties that do not trigger browser reflows (re-layouts).
+    *   **Permitted**: `opacity`, `transform` (scale, rotate, skew), and `translate`.
+    *   **Prohibited (Flag for Revision)**: Animating properties that affect physical sizes or positions like `height`, `width`, `margin`, `padding`, `top`, `left`, `right`, or `bottom`. These properties cause recalculation of grids/flexbox trees, leading to layout shifts and performance degradation.
+    *   *Exception*: Non-essential visual decorations (animated SVGs, rotating background gradients, cursor highlight animations) are fully exempt.
