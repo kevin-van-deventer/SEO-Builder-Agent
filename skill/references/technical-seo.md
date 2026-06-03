@@ -24,3 +24,10 @@ Enforce these targets in all builds:
     *   Defer third-party scripts.
     *   Avoid blocking CPU threads with unnecessary client-side hydration scripts.
     *   *Note*: First Input Delay (FID) was retired in 2024. Always target INP.
+
+---
+
+## 3. Asset & Link Optimization Standards
+*   **Image Alt Text**: Every image element MUST include a descriptive, meaningful `alt` attribute describing the visual content for indexing and screen readers. Never use empty alt tags for illustrative images unless they are strictly decorative (e.g. `alt=""`).
+*   **Lazy Loading**: Force native lazy loading for all off-screen assets and images: `<img loading="lazy" ... />`. Do NOT lazy load above-the-fold/hero images to avoid negatively impacting LCP.
+*   **Clickable Element Access**: All links (`<a>`) and buttons (`<button>`) must contain descriptive inner text. For icon-only links or interactive widgets, supply explicit `aria-label` or `title` properties. Empty or unlabeled clickable elements are critical crawl accessibility issues.
