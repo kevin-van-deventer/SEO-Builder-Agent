@@ -1,0 +1,29 @@
+{
+  "name": "seo-optimizer-skill",
+  "version": "1.0.0",
+  "description": "Comprehensive Search Engine Optimization (SEO), GEO, and E-E-A-T playbook installer for Claude Code, Codex, and Antigravity",
+  "bin": {
+    "seo-optimizer-skill": "./bin/install.mjs"
+  },
+  "keywords": [
+    "seo",
+    "aeo",
+    "geo",
+    "eeat",
+    "robots",
+    "sitemap",
+    "json-ld",
+    "schema",
+    "claude-code",
+    "codex",
+    "antigravity",
+    "skill",
+    "agent-skill"
+  ],
+  "author": "kevin-van-deventer",
+  "license": "MIT",
+  "files": [
+    "bin/",
+    "skill/"
+  ]
+}
